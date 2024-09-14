@@ -36,8 +36,7 @@ const EventsPage: React.FC = () => {
           (eventStartDate.isAfter(startOfMonth, "day") ||
             eventStartDate.isSame(startOfMonth, "day")) &&
           (eventStartDate.isBefore(endOfMonth, "day") ||
-            eventStartDate.isSame(endOfMonth, "day")) &&
-          eventEndDate.isAfter(today, "day")
+            eventStartDate.isSame(endOfMonth, "day"))
         );
       } else if (tabValue === 1) {
         return eventStartDate.isAfter(today, "day") && eventEndDate.isAfter(today, "day");
