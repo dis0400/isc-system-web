@@ -11,8 +11,8 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'sudo apt-get update'
-                sh 'sudo apt-get install -y xvfb'
+                sh 'apt-get update'
+                sh 'apt-get install -y xvfb'
                 sh 'npm install'
             }
         }
