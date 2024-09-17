@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh 'apt-get update'
                 sh 'apt-get install -y xvfb'
-                sh 'npm install'
+                sh 'npm install --legacy-peer-deps'
             }
         }
 
