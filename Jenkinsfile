@@ -9,10 +9,15 @@ pipeline {
                 git 'https://github.com/dis0400/isc-system-web.git'
             }
         }
-       
+       stage('Install Dependencies') {
+            steps {
+                sh 'npm install -g yarn'
+                sh 'yarn install'
+            }
+        }
         stage('Install Cypress') {
             steps {
-                sh 'npx add cypress --dev'
+                sh 'yarn add cypress --dev'
             }
         }
         stage('Install Xvfb and Dependencies') {
