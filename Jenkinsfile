@@ -9,35 +9,21 @@ pipeline {
                 git 'https://github.com/dis0400/isc-system-web.git'
             }
         }
-        stage('Install Dependencies') {
+       
+        stage('Install Cypress') {
             steps {
-                sh 'apt-get update'
-                sh '''
-                apt-get install -y \
-                    xvfb \
-                    libgtk2.0-0 \
-                    libgtk-3-0 \
-                    libgconf-2-4 \
-                    libnss3 \
-                    libxss1 \
-                    libasound2 \
-                    libxtst6 \
-                    libgdk-pixbuf2.0-0 \
-                    libgbm-dev \
-                    libatk1.0-0 \
-                    libpangoft2-1.0-0 \
-                    libpangocairo-1.0-0 \
-                    libatk-bridge2.0-0
-                '''
-                sh 'npm install --legacy-peer-deps'
+                sh 'npx add cypress --dev'
             }
         }
-
-        stage('Run Cypress Tests') {
+        stage('Install Xvfb and Dependencies') {
             steps {
-                sh 'xvfb-run npx cypress run'
+                sh 'apt-get update && apt-get install -y xvfb libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 libx11-xcb1'
             }
         }
-        
+        stage('Run e2e Tests') {
+            steps {
+                sh 'xvfb-run --auto-servernum -- npx cypress run --spec "cypress/e2e/loginPaul.cy.ts" '
+            }
+        }
     }
 }
